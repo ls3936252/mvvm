@@ -1,0 +1,22 @@
+ext {
+    compileSdkVersion = 27
+    buildToolsVersion = '27.0.3'
+    minSdkVersion = 16
+    targetSdkVersion = 27
+
+    //主app
+    module_appApplicationId = 'solo.com.mvvmdemo'
+    module_appVersionCode = 0001
+    module_appVersionName = '1.0.0'
+    module_appName = 'MVVM'
+
+    //引用类库的版本号
+    dependencies = [
+            "support-v4"   : "com.android.support:support-v4:27.1.1",
+            "appcompat-v7" : "com.android.support:appcompat-v7:27.1.1",
+            "constraint-layout" : "com.android.support.constraint:constraint-layout:1.1.3",
+            "systembartint" : "com.readystatesoftware.systembartint:systembartint:1.0.3",
+            "shapeLoadingView" : "com.github.zzz40500:android-shapeLoadingView:1.0.3.2"
+    ]
+
+}

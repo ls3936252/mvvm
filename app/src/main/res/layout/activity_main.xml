@@ -1,18 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <!-- 数据对象，name 是变量名，type 是类的全路径 -->
+        <variable
+            name="user"
+            type="com.mvvm.solo.myapplication.bean.User" />
 
-</android.support.constraint.ConstraintLayout>
+        <variable
+            name="array"
+            type="String[]" />
+        <variable
+            name="list"
+            type="java.util.ArrayList&lt;String&gt;" />
+        <variable
+            name="map"
+            type="java.util.HashMap&lt;String,String&gt;" />
+        <variable
+            name="arrayIndex"
+            type="int" />
+        <variable
+            name="listIndex"
+            type="int" />
+        <variable
+            name="key"
+            type="String" />
+        <variable
+            name="mHandler"
+            type="com.mvvm.solo.myapplication.event.UserEvent" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.MainActivity">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.name}"
+            android:textSize="30dp"
+            android:onClick="@{mHandler::testClick}"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+        <!-- 我们知道 TextView 的内容必须是 String 类型的，这里传入 int 会报错
+             java.lang 包下的类不需要导入 -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(user.age)}"
+            android:textSize="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+                   android:id="@+id/textView4"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@{array[arrayIndex]}"
+                   app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+               <TextView
+                   android:id="@+id/textView3"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@{list[listIndex]}"
+                   app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+              <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="@{map[key]}"
+                   app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
