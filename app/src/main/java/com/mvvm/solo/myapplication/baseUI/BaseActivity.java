@@ -2,13 +2,13 @@ package com.mvvm.solo.myapplication.baseUI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mvvm.solo.myapplication.R;
+import com.mvvm.solo.myapplication.databinding.ActivityMainBinding;
 import com.mvvm.solo.myapplication.utils.ActivityManage;
 import com.mvvm.solo.myapplication.utils.StatusBarUtil;
 
@@ -29,6 +30,7 @@ import java.io.Serializable;
 public abstract class BaseActivity extends AppCompatActivity implements OnClickListener {
     public static final String INTENTTAG = "intentTag";
     protected RelativeLayout baseactivity_topLayout;
+    protected ActivityMainBinding binding;
     protected ImageView baseactivity_backImg, baseactivity_rightImg1,
             baseactivity_rightImg2;
     protected TextView baseactivity_title, baseactivity_backText,
@@ -42,9 +44,11 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_base);
-        StatusBarUtil.setStatusBarLayoutStyle(this,true);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        super.setContentView(R.layout.activity_base);
+//        StatusBarUtil.setStatusBarLayoutStyle(this,true);
+        com.jaeger.library.StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary),1);
+//        com.jaeger.library.StatusBarUtil.setTransparent(this);
 
         baseactivity_topLayout = (RelativeLayout) findViewById(R.id.baseactivity_topLayout);
         baseactivity_backImg = (ImageView) findViewById(R.id.baseactivity_backImg);
@@ -73,6 +77,17 @@ public abstract class BaseActivity extends AppCompatActivity implements OnClickL
 
         ActivityManage.getInstance().addActivity(this);
     }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        if (baseactivity_contextLayout != null) {
+            View view = LayoutInflater.from(this).inflate(layoutResID, baseactivity_contextLayout, false);
+            baseactivity_contextLayout.setId(android.R.id.content);
+            baseactivity_contextLayout.removeAllViews();
+            baseactivity_contextLayout.addView(view);
+        }
+    }
+
 
     /*
      * 返回事件

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.jaeger.library.StatusBarUtil;
 import com.mvvm.solo.myapplication.R;
 import com.mvvm.solo.myapplication.baseUI.BaseActivity;
 import com.mvvm.solo.myapplication.bean.User;
@@ -20,9 +21,13 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        baseactivity_title.setText("title");
+        super.setContentView(R.layout.activity_main);
+//        showBadnetworkLayout();
+        /*        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         User user = new User("ls", 18);
         binding.setUser(user);
+        user.setAge(20);
         String[] arrays = new String[]{"数组1", "数组2", "数组3"};
         binding.setArrayIndex(0);
         binding.setArray(arrays);
@@ -38,7 +43,7 @@ public class MainActivity extends BaseActivity {
         map.put("hash3", "键值对3");
         binding.setKey("hash3");
         binding.setMap(map);
-        binding.setMHandler(new UserEvent());
+        binding.setMHandler(new UserEvent());*/
 
     }
 
